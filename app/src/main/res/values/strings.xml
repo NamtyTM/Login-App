@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">SignupLogin</string>
+    <string name="lgLogin">LOGIN</string>
+    <string name="log_text">Register Now!!!!</string>
+    <string name="sign_text">Already has an account!! Login here</string>
+    <string name="lgSign">SignIn</string>
+    <string name="lgLogout">LOGOUT</string>
+    <string name="lgGithub">GITHUB</string>
+    <string name="wel">Welcome back</string>
+</resources>

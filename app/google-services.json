@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "968303966386",
+    "project_id": "signuplogin-fda82",
+    "storage_bucket": "signuplogin-fda82.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:968303966386:android:3d1a2db9873b4d9d04b1ab",
+        "android_client_info": {
+          "package_name": "com.example.signuplogin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaC89nng4-pMEg0X9BlJiOwEBqfl1-Qxw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
