@@ -26,26 +26,26 @@ public class HomeActivity extends AppCompatActivity {
         txtUser = findViewById(R.id.txtMessage);
         user = firebaseAuth.getCurrentUser();
 
-//        userData();
+        userData();
 
-//        btn_logout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                FirebaseAuth.getInstance().signOut();
-//                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-//                startActivity(intent);
-//                finish();
-//            }
-//        });
+        btn_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
-//    public void userData(){
-//        if (user == null ) {
-//            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-//            startActivity(intent);
-//            finish();
-//        }
-//        else {
-//            txtUser.setText(user.getEmail());
-//        }
-//    }
+    public void userData(){
+        if (user == null ) {
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        else {
+            txtUser.setText(user.getEmail());
+        }
+    }
 }
