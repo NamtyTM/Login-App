@@ -53,13 +53,6 @@ public class GithubActivity extends AppCompatActivity {
                         // Target specific email with login hint.
                         provider.addCustomParameter("login", email);
 
-                        List<String> scopes =
-                                new ArrayList<String>() {
-                                    {
-                                        add("user:email");
-                                    }
-                                };
-                        provider.setScopes(scopes);
 
                         Task<AuthResult> pendingResultTask = fAuth.getPendingAuthResult();
                         if (pendingResultTask != null) {
