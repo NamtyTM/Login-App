@@ -48,52 +48,6 @@ public class GithubActivity extends AppCompatActivity {
                 try {
                     if(gitEmail == null){
                         Toast.makeText(GithubActivity.this, "Enter your github accounted!!", Toast.LENGTH_SHORT).show();
-                    }else {
-                        OAuthProvider.Builder provider = OAuthProvider.newBuilder("github.com");
-                        // Target specific email with login hint.
-                        provider.addCustomParameter("login", email);
-
-
-                        Task<AuthResult> pendingResultTask = fAuth.getPendingAuthResult();
-                        if (pendingResultTask != null) {
-                            // There's something already here! Finish the sign-in for your user.
-                            pendingResultTask
-                                    .addOnSuccessListener(
-                                            new OnSuccessListener<AuthResult>() {
-                                                @Override
-                                                public void onSuccess(AuthResult authResult) {
-                                                    // User is signed in.
-                                                    // IdP data available in
-
-                                                }
-                                            })
-                                    .addOnFailureListener(
-                                            new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    // Handle failure.
-                                                    Toast.makeText(GithubActivity.this,""+e.getMessage(), Toast.LENGTH_SHORT).show();
-                                                }
-                                            });
-                        } else {
-                            fAuth
-                                    .startActivityForSignInWithProvider(GithubActivity.this, provider.build())
-                                    .addOnSuccessListener(
-                                            new OnSuccessListener<AuthResult>() {
-                                                @Override
-                                                public void onSuccess(AuthResult authResult) {
-                                                    openNextActivity();
-                                                }
-                                            })
-                                    .addOnFailureListener(
-                                            new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    // Handle failure.
-                                                    Toast.makeText(GithubActivity.this,""+e.getMessage(), Toast.LENGTH_SHORT).show();
-                                                }
-                                            });
-                        }
                     }
                 }catch (Exception e){
                     Toast.makeText(GithubActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
