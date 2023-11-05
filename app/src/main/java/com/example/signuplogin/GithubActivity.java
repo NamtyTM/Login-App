@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.OAuthProvider;
 
 import java.util.ArrayList;
@@ -44,63 +45,21 @@ public class GithubActivity extends AppCompatActivity {
         logGit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = gitEmail.getText().toString();
                 try {
                     if(gitEmail == null){
                         Toast.makeText(GithubActivity.this, "Enter your github accounted!!", Toast.LENGTH_SHORT).show();
                     }else {
-                        OAuthProvider.Builder provider = OAuthProvider.newBuilder("github.com");
-                        // Target specific email with login hint.
-                        provider.addCustomParameter("login", email);
-
-                        List<String> scopes =
-                                new ArrayList<String>() {
-                                    {
-                                        add("user:email");
-                                    }
-                                };
-                        provider.setScopes(scopes);
-
-                        Task<AuthResult> pendingResultTask = fAuth.getPendingAuthResult();
-                        if (pendingResultTask != null) {
-                            // There's something already here! Finish the sign-in for your user.
-                            pendingResultTask
-                                    .addOnSuccessListener(
-                                            new OnSuccessListener<AuthResult>() {
-                                                @Override
-                                                public void onSuccess(AuthResult authResult) {
-                                                    // User is signed in.
-                                                    // IdP data available in
-
-                                                }
-                                            })
-                                    .addOnFailureListener(
-                                            new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    // Handle failure.
-                                                    Toast.makeText(GithubActivity.this,""+e.getMessage(), Toast.LENGTH_SHORT).show();
-                                                }
-                                            });
-                        } else {
-                            fAuth
-                                    .startActivityForSignInWithProvider(GithubActivity.this, provider.build())
-                                    .addOnSuccessListener(
-                                            new OnSuccessListener<AuthResult>() {
-                                                @Override
-                                                public void onSuccess(AuthResult authResult) {
-                                                    openNextActivity();
-                                                }
-                                            })
-                                    .addOnFailureListener(
-                                            new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    // Handle failure.
-                                                    Toast.makeText(GithubActivity.this,""+e.getMessage(), Toast.LENGTH_SHORT).show();
-                                                }
-                                            });
-                        }
+                        SignInWithGithubProvider(
+                                OAuthProvider.newBuilder("github.com")
+                                        .addCustomParameter("login",gitEmail.getText().toString())
+                                        .setScopes(
+                                                new ArrayList<String>() {
+                                                    {
+                                                        add("user:email");
+                                                    }
+                                                })
+                                        .build()
+                        );
                     }
                 }catch (Exception e){
                     Toast.makeText(GithubActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -109,10 +68,37 @@ public class GithubActivity extends AppCompatActivity {
         });
     }
 
-    private void openNextActivity() {
-        Intent intent = new Intent(GithubActivity.this, HomeActivity.class);
-        startActivity(intent);
-        finish();
+    private void SignInWithGithubProvider(OAuthProvider login) {
+        Task<AuthResult> pendingAuthTask = fAuth.getPendingAuthResult();
+        if (pendingAuthTask != null) {
+            pendingAuthTask.addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                @Override
+                public void onSuccess(AuthResult authResult) {
+                    Toast.makeText(GithubActivity.this, "User exist", Toast.LENGTH_SHORT).show();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(GithubActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }else{
+            fAuth.startActivityForSignInWithProvider(this,login).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(GithubActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                @Override
+                public void onSuccess(AuthResult authResult) {
+                    FirebaseUser user = fAuth.getCurrentUser();
+                    Intent intent = new Intent(GithubActivity.this, HomeActivity.class);
+                    intent.putExtra("githubname",user.getEmail());
+                    startActivity(intent);
+                    finish();
+                }
+            });
+        }
     }
 
     public void loginForm (){

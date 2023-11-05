@@ -20,13 +20,15 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
+        Intent intent = getIntent();
+        String githubEmail = intent.getStringExtra("githubname");
         firebaseAuth = FirebaseAuth.getInstance();
         btn_logout = findViewById(R.id.logOut);
         txtUser = findViewById(R.id.txtMessage);
         user = firebaseAuth.getCurrentUser();
 
-        userData();
+        txtUser.setText(githubEmail);
+
 
         btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,15 +39,5 @@ public class HomeActivity extends AppCompatActivity {
                 finish();
             }
         });
-    }
-    public void userData(){
-        if (user == null ) {
-            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-            startActivity(intent);
-            finish();
-        }
-        else {
-            txtUser.setText(user.getEmail());
-        }
     }
 }
