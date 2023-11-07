@@ -30,7 +30,6 @@ public class LoginActivity extends AppCompatActivity {
     public EditText editMail,editPass;
     Button login;
     FirebaseAuth firebaseAuth;
-    ImageView git;
 
     @Override
     public void onStart() {
@@ -53,15 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         editMail = findViewById(R.id.edEmail);
         editPass = findViewById(R.id.edPassword);
         login = findViewById(R.id.btn_login);
-        git = findViewById(R.id.Github_Id);
 
-        git.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, GithubActivity.class);
-                startActivity(intent);
-            }
-        });
         logText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

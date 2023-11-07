@@ -28,7 +28,7 @@ public class HomeActivity extends AppCompatActivity {
         user = firebaseAuth.getCurrentUser();
 
         txtUser.setText(githubEmail);
-
+        userData();
 
         btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,5 +39,17 @@ public class HomeActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+    }
+
+    private void userData() {
+        if (user == null ) {
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        else {
+            txtUser.setText(user.getEmail());
+        }
     }
 }
