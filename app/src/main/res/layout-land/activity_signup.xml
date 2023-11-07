@@ -71,17 +71,18 @@
             android:textColor="@color/black" />
 
         <EditText
-            android:id="@+id/edPassword"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="110dp"
-            android:layout_marginEnd="15dp"
+            android:id="@+id/edPassword"
             android:background="@drawable/border"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="100dp"
+            android:padding="15dp"
+            android:hint="Password"
+            android:inputType="textPassword"
             android:drawableLeft="@drawable/ic_lock_24"
             android:drawablePadding="8dp"
-            android:hint="Password"
-            android:padding="15dp"
             android:textColor="@color/black" />
 
         <Button
