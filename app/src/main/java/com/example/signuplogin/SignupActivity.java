@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class SignupActivity extends AppCompatActivity {
+    //create object
     public EditText editMail,editPass;
     Button sign;
     TextView regiText;
@@ -43,8 +44,9 @@ public class SignupActivity extends AppCompatActivity {
         editMail = findViewById(R.id.edEmail);
         editPass = findViewById(R.id.edPassword);
         regiText = findViewById(R.id.registerText);
-        sign = findViewById(R.id.bnt_signIn);
+        sign = findViewById(R.id.btn_signIn);
 
+        //event TextView Already have an account
         regiText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,6 +55,7 @@ public class SignupActivity extends AppCompatActivity {
                 finish();
             }
         });
+        //event btn btn signIn
         sign.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
