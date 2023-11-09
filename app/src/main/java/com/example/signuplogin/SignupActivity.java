@@ -39,7 +39,7 @@ public class SignupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-        //get value
+        //get value from object
         firebaseAuth = FirebaseAuth.getInstance();
         editMail = findViewById(R.id.edEmail);
         editPass = findViewById(R.id.edPassword);
